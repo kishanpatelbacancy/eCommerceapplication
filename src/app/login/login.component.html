@@ -1,0 +1,29 @@
+<div class="global-container">
+	<div class="card login-form">
+	<div class="card-body">
+		<h3 class="card-title text-center">Log in</h3>
+		<div class="card-text">
+			<!--
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
+			<form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && loginFormSubmit(loginForm)">
+				<!-- to error: add class "has-danger" -->
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email</label>
+					<input type="text" formControlName="email" class="form-control form-control-sm" placeholder="Email" #userName required value="kishan.patel@bacancy.com">
+                    <div class="error" *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">Email is required</div>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Password</label>
+					
+					<input type="password" formControlName="password" class="form-control form-control-sm" placeholder="Password" #userPassword required value="password">
+                    <span class="error" *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">Password is required</span>
+				</div>
+				<input type="button" class="btn btn-primary btn-block" [disabled]="loginForm.invalid" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">
+				<div class="sign-up">
+					Don't have an account? <a routerLink="/register-user">Create One</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+  
